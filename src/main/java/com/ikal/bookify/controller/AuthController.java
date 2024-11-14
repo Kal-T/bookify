@@ -51,7 +51,7 @@ public class AuthController {
         // should return like that
         //  return ResponseEntity.ok("Password reset link sent to your email");
 
-        return ResponseEntity.ok(new ApiResponse("Success", "Authentication successful",new InitialPasswordResetResponse(token)));
+        return ResponseEntity.ok(new ApiResponse("Success", "Request successful",new InitialPasswordResetResponse(token)));
     }
 
     @PostMapping("/reset-password")

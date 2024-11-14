@@ -34,6 +34,17 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(EmailAlreadyUseException.class)
+    public ResponseEntity<ApiResponse> handelEmailAlreadyUseException(EmailAlreadyUseException ex) {
+        ApiResponse response = new ApiResponse(
+                "error",
+                "Registration failed.",
+                "409",
+                "Email is already Used."
+        );
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+    }
+
     // Handle BadCredentialsException (or any other exception)
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ApiResponse> handleBadCredentialsException(BadCredentialsException ex) {

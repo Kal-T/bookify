@@ -10,6 +10,5 @@ public class PasswordResetRequest {
     private String token;
 
     @NotNull(message = "New password cannot be null")
-    @Size(min = 8, message = "Password must be at least 8 characters long")
     private String newPassword;
 }

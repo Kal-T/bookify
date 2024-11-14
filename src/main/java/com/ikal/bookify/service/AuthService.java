@@ -3,6 +3,7 @@ package com.ikal.bookify.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ikal.bookify.dto.JwtResponse;
 import com.ikal.bookify.dto.RegisterRequest;
+import com.ikal.bookify.exception.EmailAlreadyUseException;
 import com.ikal.bookify.exception.UserNotFoundException;
 import com.ikal.bookify.model.User;
 import com.ikal.bookify.repository.UserRepository;
@@ -41,7 +42,7 @@ public class AuthService {
     public void register(RegisterRequest registerRequest) {
         Optional<User> existingUser = userRepository.findByEmail(registerRequest.getEmail());
         if (existingUser.isPresent()) {
-            throw new IllegalStateException("Email already in use");
+            throw new EmailAlreadyUseException();
         }
 
         User user = new User(registerRequest.getEmail(), encoder.encode(registerRequest.getPassword()), registerRequest.getUsername(), registerRequest.getCountry());
@@ -50,14 +51,13 @@ public class AuthService {
 
     public Optional<JwtResponse> refreshToken(String authHeader) throws IOException {
         final String refreshToken;
-        final String userEmail;
+        final String username;
 
         refreshToken = authHeader.substring(7);
-        userEmail = jwtService.extractUsername(refreshToken);
+        username = jwtService.extractUsername(refreshToken);
 
-        if (userEmail != null) {
-            var user = userRepository.findByEmail(userEmail)
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        if (username != null) {
+            var user = userRepository.findByUserName(username);
 
             if (jwtService.isTokenValid(refreshToken, user)) {
                 var accessToken = jwtService.generateToken(user);
