@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class TokenBlacklistService {
 
     private final RedisTemplate<String, String> redisTemplate;
+    private static final String BLACKLIST_PREFIX = "jwt:blacklist:";
 
     @Autowired
     public TokenBlacklistService(RedisTemplate<String, String> redisTemplate) {
@@ -17,11 +18,13 @@ public class TokenBlacklistService {
     }
 
     public void blacklistToken(String token, long expirationTimeInMillis) {
-        redisTemplate.opsForValue().set(token, "blacklisted", expirationTimeInMillis, TimeUnit.MILLISECONDS);
+        String key = BLACKLIST_PREFIX + token;
+        redisTemplate.opsForValue().set(key, "blacklisted", expirationTimeInMillis, TimeUnit.MILLISECONDS);
     }
 
     public boolean isTokenBlacklisted(String token) {
-        return redisTemplate.hasKey(token);
+        String key = BLACKLIST_PREFIX + token;
+        return redisTemplate.hasKey(key);
     }
 }
 

@@ -41,9 +41,16 @@ public class Class {
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
 
+    @Enumerated(EnumType.STRING)
+    private ClassStatus status = ClassStatus.SCHEDULED;
+
     @PreUpdate
     public void preUpdate() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public enum ClassStatus {
+        SCHEDULED, COMPLETED, CANCELED
     }
 
     public Class(String name, String country, int creditsRequired, LocalDateTime scheduleTime, LocalDateTime endTime, int availableSlots) {

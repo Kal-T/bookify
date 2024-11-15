@@ -18,5 +18,9 @@ public interface ClassRepository extends JpaRepository<Class, Long> {
     // Find available classes for a specific country
     @Query("SELECT c FROM Class c WHERE c.country = :country AND c.availableSlots > 0 AND c.scheduleTime > :currentTime")
     List<Class> findAvailableClasses(@Param("country") String country, @Param("currentTime") LocalDateTime currentTime);
+
+    List<Class> findByEndTimeBeforeAndStatusNot(LocalDateTime now, Class.ClassStatus classStatus);
+
+    List<Class> findAllByScheduleTimeAfterAndStatusNot(LocalDateTime currentTime, Class.ClassStatus classStatus);
 }
 

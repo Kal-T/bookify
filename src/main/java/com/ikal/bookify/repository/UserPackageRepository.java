@@ -15,6 +15,12 @@ import java.util.Optional;
 public interface UserPackageRepository extends JpaRepository<UserPackage, Long> {
     List<UserPackage> findByUserAndStatus(User user, UserPackage.Status status);
 
+    @Query("SELECT up FROM UserPackage up WHERE up.user.userId = :userId")
+    List<UserPackage> findAllByUserId(@Param("userId") Long userId);
+
     @Query("SELECT up FROM UserPackage up WHERE up.user.userId = :userId AND up.aPackage.packageId = :packageId")
     Optional<UserPackage> findUserIdAndPackageId(@Param("userId") Long userId, @Param("packageId") Long packageId);
+
+    @Query(value = "SELECT * FROM user_packages up WHERE up.user_id = :userId AND up.status = 'ACTIVE' ORDER BY up.purchase_date DESC LIMIT 1", nativeQuery = true)
+    Optional<UserPackage> findMostRecentActivePackageByUserId(@Param("userId") Long userId);
 }
