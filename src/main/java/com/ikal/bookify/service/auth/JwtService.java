@@ -72,6 +72,7 @@ public class JwtService {
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .claim("userInfo", userInfoJson)
+                .claim("userId", user.getUserId())
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -85,6 +86,17 @@ public class JwtService {
 
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
+    }
+
+    public Long extractUserId(String jwtToken) {
+        // Parse the JWT and extract claims
+        Claims claims = Jwts.parser()
+                .setSigningKey(getSignInKey())
+                .build()
+                .parseClaimsJws(jwtToken)
+                .getBody();
+
+        return claims.get("userId", Long.class);
     }
 
     public String extractUsername(String token) {

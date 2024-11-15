@@ -27,6 +27,30 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
+    // Handle General Exception
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ApiResponse> handleResourceNotFoundException(Exception ex) {
+        ApiResponse response = new ApiResponse(
+                "error",
+                "Resource Not Found",
+                "404",
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    // Handle General Exception
+    @ExceptionHandler(PurchasePackageFailException.class)
+    public ResponseEntity<ApiResponse> handlePurchasePackageFailException(Exception ex) {
+        ApiResponse response = new ApiResponse(
+                "error",
+                "Purchase Package Fail",
+                "409",
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(ExpiredJwtException.class)
     public ResponseEntity<ApiResponse> handleExpiredJwtException(ExpiredJwtException ex) {
         ApiResponse response = new ApiResponse(

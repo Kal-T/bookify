@@ -1,0 +1,9 @@
+INSERT INTO packages (name, country, credits, price, expiry_date) VALUES ('Basic Package SG', 'Singapore', 5, 50.00, NULL);
+INSERT INTO packages (name, country, credits, price, expiry_date) VALUES ('Standard Package SG', 'Singapore', 10, 100.00, NULL);
+INSERT INTO packages (name, country, credits, price, expiry_date) VALUES ('Premium Package SG', 'Singapore', 20, 200.00, NULL);
+INSERT INTO packages (name, country, credits, price, expiry_date) VALUES ('Basic Package MY', 'Malaysia', 5, 40.00, NULL);
+INSERT INTO packages (name, country, credits, price, expiry_date) VALUES ('Standard Package MY', 'Malaysia', 10, 80.00, NULL);
+INSERT INTO packages (name, country, credits, price, expiry_date) VALUES ('Premium Package MY', 'Malaysia', 20, 160.00, NULL);
+INSERT INTO packages (name, country, credits, price, expiry_date) VALUES ('Basic Package MM', 'Myanmar', 5, 30.00, NULL);
+INSERT INTO packages (name, country, credits, price, expiry_date) VALUES ('Standard Package MM', 'Myanmar', 10, 60.00, NULL);
+INSERT INTO packages (name, country, credits, price, expiry_date) VALUES ('Premium Package MM', 'Myanmar', 20, 120.00, NULL);
