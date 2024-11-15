@@ -194,4 +194,36 @@ public class AuthController {
 
         }
     }
+
+    @Operation(
+            description = "This is a Bookify API Logout Endpoint",
+            summary = "Logout",
+            responses = {
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                            description = "Success",
+                            responseCode = "200",
+                            content = @Content(schema = @Schema(implementation = ApiResponse.class))
+                    ),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                            description = "Token not found.",
+                            responseCode = "401",
+                            content = @Content(schema = @Schema(implementation = ApiResponse.class))
+                    ),
+            }
+
+    )
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+        final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+
+        if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.ok(new ApiResponse("Error", "Invalid Credentials", "401", "Token not found."));
+        }
+
+        authService.logout(authHeader);
+        return ResponseEntity.ok(new ApiResponse("Success", "Logout successful"));
+    }
 }

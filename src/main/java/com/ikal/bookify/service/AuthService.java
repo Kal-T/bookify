@@ -49,6 +49,11 @@ public class AuthService {
         userRepository.save(user);
     }
 
+    public void logout(String authHeader) {
+        String token = authHeader.substring(7);
+        jwtService.logout(token);
+    }
+
     public Optional<JwtResponse> refreshToken(String authHeader) throws IOException {
         final String refreshToken;
         final String username;
