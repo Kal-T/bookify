@@ -1,14 +1,12 @@
-package com.ikal.bookify.service;
+package com.ikal.bookify.service.auth;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ikal.bookify.dto.JwtResponse;
 import com.ikal.bookify.dto.RegisterRequest;
 import com.ikal.bookify.exception.EmailAlreadyUseException;
-import com.ikal.bookify.exception.UserNotFoundException;
 import com.ikal.bookify.model.User;
 import com.ikal.bookify.repository.UserRepository;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.io.IOException;

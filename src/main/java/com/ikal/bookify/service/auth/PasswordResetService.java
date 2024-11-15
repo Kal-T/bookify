@@ -1,4 +1,4 @@
-package com.ikal.bookify.service;
+package com.ikal.bookify.service.auth;
 
 import com.ikal.bookify.exception.UserNotFoundException;
 import com.ikal.bookify.model.User;

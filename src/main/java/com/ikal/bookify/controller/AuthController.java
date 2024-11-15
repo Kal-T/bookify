@@ -1,9 +1,8 @@
 package com.ikal.bookify.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ikal.bookify.dto.*;
-import com.ikal.bookify.service.AuthService;
-import com.ikal.bookify.service.PasswordResetService;
+import com.ikal.bookify.service.auth.AuthService;
+import com.ikal.bookify.service.auth.PasswordResetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,14 +11,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 @Tag(name = "Auth", description = "Auth Endpoint")

@@ -1,4 +1,4 @@
-package com.ikal.bookify.service;
+package com.ikal.bookify.service.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

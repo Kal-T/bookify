@@ -1,6 +1,6 @@
 package com.ikal.bookify.config;
 
-import com.ikal.bookify.service.AuthUserDetailService;
+import com.ikal.bookify.service.auth.AuthUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
