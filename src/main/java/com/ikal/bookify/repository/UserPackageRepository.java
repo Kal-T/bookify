@@ -23,4 +23,7 @@ public interface UserPackageRepository extends JpaRepository<UserPackage, Long> 
 
     @Query(value = "SELECT * FROM user_packages up WHERE up.user_id = :userId AND up.status = 'ACTIVE' ORDER BY up.purchase_date DESC LIMIT 1", nativeQuery = true)
     Optional<UserPackage> findMostRecentActivePackageByUserId(@Param("userId") Long userId);
+
+    @Query("SELECT up.aPackage FROM UserPackage up WHERE up.user.userId = :userId")
+    List<Package> findPackagesByUserId(@Param("userId") Long userId);
 }

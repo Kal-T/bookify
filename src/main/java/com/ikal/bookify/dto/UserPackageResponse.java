@@ -1,22 +1,16 @@
-package com.ikal.bookify.model;
+package com.ikal.bookify.dto;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import com.ikal.bookify.model.Package;
+import com.ikal.bookify.model.User;
+import com.ikal.bookify.model.UserPackage;
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Data
-@Entity
-@Table(name = "user_packages")
-public class UserPackage {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserPackageResponse {
+
     private Long userPackageId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
     @ManyToOne
     @JoinColumn(name = "package_id")
@@ -25,7 +19,7 @@ public class UserPackage {
     private int remainingCredits;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private UserPackage.Status status;
 
     @Column(name = "purchase_date")
     private LocalDateTime purchaseDate;
@@ -33,6 +27,4 @@ public class UserPackage {
     public enum Status {
         ACTIVE, EXPIRED
     }
-
 }
-

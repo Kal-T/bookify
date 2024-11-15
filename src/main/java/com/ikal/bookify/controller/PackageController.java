@@ -107,8 +107,8 @@ public class PackageController {
             return (ResponseEntity<ApiResponse>) response;
         }
         Long userId = (Long) extractToken.getBody();
-        List<UserPackage> userPackages = packageService.getUserPackages(userId);
-        return ResponseEntity.ok(new ApiResponse("Success", "Get user avaialbe packages successfully",userPackages));
+        List<Package> packages = packageService.getUserPackages(userId);
+        return ResponseEntity.ok(new ApiResponse("Success", "Get user avaialbe packages successfully",packages));
     }
 }
 

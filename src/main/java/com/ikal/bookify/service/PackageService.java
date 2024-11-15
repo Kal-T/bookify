@@ -89,11 +89,11 @@ public class PackageService {
         }
     }
 
-    public List<UserPackage> getUserPackages(Long userId) {
+    public List<Package> getUserPackages(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
 
-        return userPackageRepository.findByUserAndStatus(user, UserPackage.Status.ACTIVE);
+        return userPackageRepository.findPackagesByUserId(user.getUserId());
     }
 }
 
