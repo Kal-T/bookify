@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
                 "error",
                 "Invalid credentials",
                 "401",
-                "The provided credentials are incorrect"
+                "The email or password provided is incorrect."
         );
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }

@@ -28,7 +28,7 @@ public class AuthService {
 
     public JwtResponse login(String email, String password) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
+                .orElseThrow(() -> new BadCredentialsException("Incorrect email or password"));
         if (encoder.matches(password, user.getPasswordHash())) {
             try {
                 return new JwtResponse(jwtService.generateToken(user), jwtService.generateRefreshToken(user));
@@ -36,7 +36,7 @@ public class AuthService {
                 throw new RuntimeException(e);
             }
         }
-        throw new BadCredentialsException("Invalid credentials");
+        throw new BadCredentialsException("Incorrect email or password");
     }
 
     public void register(RegisterRequest registerRequest) {
